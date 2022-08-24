@@ -23,8 +23,8 @@
 <body>
   <!-- your content here... -->
 
-  <main class="audi-player-container">
-    <div class="thumb">
+  <main class="audio-player-container">
+    <div class="thumbnail-container">
       <img src="ressources/thumbs/Solar.png" alt="album-thumbnail" class="thumbnail">
     </div>
     <div class="music-info">
@@ -35,19 +35,18 @@
         </div>
         <p class="current-index"><span>1</span>/4</p>
       </div>
-    </div>
-    <audio src="ressources/music/Solar.mp3"></audio>
-    <div class="progress-container">
-      <div class="progress">
+
+      <audio src="ressources/music/Solar.mp3"></audio>
+      <div class="progress-container">
+        <div class="progress-bar"> </div>
         <span class="time-indicator current-time">0:00</span>
-        <span class="duration-time">0:00</span>
+        <span class=" time-indicator duration-time">0:00</span>
       </div>
       <nav class="navigation">
         <button class="shuffle">
-          <?xml version="1.0" encoding="iso-8859-1"?><svg
-            fill="#f1f1f1" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-            style="enable-background: new 0 0 512 512" xml:space="preserve">
+          <?xml version="1.0" encoding="iso-8859-1"?><svg fill="#f1f1f1" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 512 512" style="enable-background: new 0 0 512 512" xml:space="preserve">
             <g>
               <g>
                 <path
@@ -84,8 +83,8 @@
           </svg>
         </button>
         <button class="prev-btn"><img src="ressources/icons/prev-icon.svg" alt="previous"></button>
-        <button class="prev-btn"><img src="ressources/icons/play-icon.svg" alt="play"></button>
-        <button class="prev-btn"><img src="ressources/icons/next-icon.svg" alt="next"></button>
+        <button class="play-btn"><img src="ressources/icons/play-icon.svg" alt="play"></button>
+        <button class="next-btn"><img src="ressources/icons/next-icon.svg" alt="next"></button>
       </nav>
     </div>
   </main>
