@@ -23,6 +23,63 @@ function populateUI({ title, artist }) {
 
 populateUI(musicData);
 
-console.log(populateUI(musicData[currentMusicIndex - 1]));
+populateUI(musicData[currentMusicIndex - 1]);
 
-const playBtn = document.querySelector('.playbtn');
+const playBtn = document.querySelector('.play-btn');
+
+playBtn.addEventListener('click', handlePlayPause);
+
+function handlePlayPause() {
+  if (musicPlayer.paused) play();
+  else {
+    pause();
+  }
+}
+
+function play() {
+  playBtn.querySelector('img').src = './ressources/icons/pause-icon.svg';
+  musicPlayer.play();
+}
+
+function pause() {
+  playBtn.querySelector('img').src = './ressources/icons/play-icon.svg';
+  musicPlayer.pause();
+}
+
+const displayCurrentTime = document.querySelector('.current-time');
+const durationTime = document.querySelector('.duration-time');
+const progressBar = document.querySelector('.progress-bar');
+
+musicPlayer.addEventListener('loadeddata', fillDurationVariables);
+
+let current;
+let totalDuration;
+
+function fillDurationVariables() {
+  current = musicPlayer.currentTime;
+  totalDuration = musicPlayer.duration;
+
+  formatValue(current, displayCurrentTime);
+  formatValue(totalDuration, durationTime);
+}
+
+function formatValue(val, element) {
+  const currentMin = Math.trunc(val / 60);
+  let currentSec = Math.trunc(val % 60);
+
+  if (currentSec < 10) {
+    currentSec = `0${currentSec}`;
+  }
+
+  element.textContent = `${currentMin}:${currentSec}`;
+}
+
+musicPlayer.addEventListener('timeupdate', updateProgress);
+
+function updateProgress(e) {
+  current = e.srcElement.currentTime;
+  formatValue(current, displayCurrentTime);
+
+  const progressValue = current / totalDuration;
+  progressBar.style.transform = `scaleX(${progressValue})`;
+}
