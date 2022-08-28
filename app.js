@@ -95,3 +95,25 @@ function setProgress(e) {
   const x = e.clientX - rect.left;
   musicPlayer.currentTime = (x / width) * totalDuration;
 }
+
+
+
+const nextBtn = document.querySelector('.next-btn');
+const prevBtn = document.querySelector('.prev-btn');
+
+[prevBtn, nextBtn].forEach((btn) => {
+  btn.addEventListener('click', changeSong);
+});
+musicPlayer.addEventListener('ended', changeSong);
+
+function changeSong(e) {
+  e.target.classList.contains('next-btn') || e.type === 'ended'
+    ? currentMusicIndex++
+    : currentMusicIndex--;
+
+  if (currentMusicIndex < 1) currentMusicIndex = musicData.length;
+  else if (currentMusicIndex > musicData.length) currentMusicIndex = 1;
+
+  populateUI(musicData[currentMusicIndex - 1]);
+  play();
+}
