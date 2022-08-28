@@ -96,7 +96,14 @@ function setProgress(e) {
   musicPlayer.currentTime = (x / width) * totalDuration;
 }
 
+let shuffle = false;
+function switchShuffle(params) {
+  btnShuffle.classList.toggle('active');
+  shuffle = !shuffle;
+}
 
+const btnShuffle = document.querySelector('.shuffle');
+btnShuffle.addEventListener('click', switchShuffle);
 
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
@@ -107,6 +114,11 @@ const prevBtn = document.querySelector('.prev-btn');
 musicPlayer.addEventListener('ended', changeSong);
 
 function changeSong(e) {
+  if (shuffle) {
+    playAShuffledSong();
+    return;
+  }
+
   e.target.classList.contains('next-btn') || e.type === 'ended'
     ? currentMusicIndex++
     : currentMusicIndex--;
@@ -115,5 +127,18 @@ function changeSong(e) {
   else if (currentMusicIndex > musicData.length) currentMusicIndex = 1;
 
   populateUI(musicData[currentMusicIndex - 1]);
+  play();
+}
+
+function playAShuffledSong() {
+  const musicWithoutCurrentSong = musicData.filter(
+    (el) => el.id !== currentMusicIndex,
+  );
+  const randomMusic =
+    musicWithoutCurrentSong[
+      Math.trunc(Math.random() * musicWithoutCurrentSong.length)
+    ];
+  currentMusicIndex = randomMusic.id;
+  populateUI(randomMusic);
   play();
 }
